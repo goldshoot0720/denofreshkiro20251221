@@ -4,6 +4,7 @@
  */
 
 import { signal } from "@preact/signals";
+import { useEffect } from "preact/hooks";
 import type { Food, CreateFoodData } from "../lib/types/models.ts";
 
 interface FoodManagerProps {
@@ -173,15 +174,14 @@ const getStatusColor = (status: string, daysLeft: number | null) => {
 };
 
 export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
-  // 初始化數據
-  if (initialFoods.length > 0 && foods.value.length === 0) {
-    foods.value = initialFoods;
-  }
-
-  // 組件載入時自動載入資料
-  if (foods.value.length === 0 && !loading.value) {
-    loadFoods();
-  }
+  // 使用 useEffect 來載入資料
+  useEffect(() => {
+    if (initialFoods.length > 0) {
+      foods.value = initialFoods;
+    } else {
+      loadFoods();
+    }
+  }, []);
 
   // 篩選食品
   const filteredFoods = foods.value.filter(food =>

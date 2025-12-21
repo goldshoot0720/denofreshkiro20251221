@@ -4,6 +4,7 @@
  */
 
 import { signal } from "@preact/signals";
+import { useEffect } from "preact/hooks";
 import type { Subscription, CreateSubscriptionData } from "../lib/types/models.ts";
 
 interface SubscriptionManagerProps {
@@ -177,15 +178,14 @@ const getDaysLeft = (nextdate?: string) => {
 };
 
 export default function SubscriptionManager({ initialSubscriptions = [] }: SubscriptionManagerProps) {
-  // 初始化數據
-  if (initialSubscriptions.length > 0 && subscriptions.value.length === 0) {
-    subscriptions.value = initialSubscriptions;
-  }
-
-  // 組件載入時自動載入資料
-  if (subscriptions.value.length === 0 && !loading.value) {
-    loadSubscriptions();
-  }
+  // 使用 useEffect 來載入資料
+  useEffect(() => {
+    if (initialSubscriptions.length > 0) {
+      subscriptions.value = initialSubscriptions;
+    } else {
+      loadSubscriptions();
+    }
+  }, []);
 
   // 篩選訂閱
   const filteredSubscriptions = subscriptions.value.filter(sub =>
