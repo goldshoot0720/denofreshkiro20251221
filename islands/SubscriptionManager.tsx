@@ -171,11 +171,28 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
     }
   }, []);
 
-  // 篩選訂閱
-  const filteredSubscriptions = subscriptions.value.filter(sub =>
-    sub.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-    (sub.note && sub.note.toLowerCase().includes(searchTerm.value.toLowerCase()))
-  );
+  // 篩選和排序訂閱
+  const filteredSubscriptions = subscriptions.value
+    .filter(sub =>
+      sub.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+      (sub.note && sub.note.toLowerCase().includes(searchTerm.value.toLowerCase()))
+    )
+    .sort((a, b) => {
+      // 按下次付款日期排序（由近至遠）
+      if (!a.nextdate && !b.nextdate) return 0;
+      if (!a.nextdate) return 1; // 沒有日期的排在後面
+      if (!b.nextdate) return -1; // 沒有日期的排在後面
+      
+      const dateA = new Date(a.nextdate);
+      const dateB = new Date(b.nextdate);
+      
+      // 檢查日期是否有效
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+      
+      return dateA.getTime() - dateB.getTime(); // 由近至遠
+    });
 
   return (
     <div class="space-y-6">

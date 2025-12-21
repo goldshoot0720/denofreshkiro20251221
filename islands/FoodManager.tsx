@@ -188,11 +188,28 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
     }
   }, []);
 
-  // 篩選食品
-  const filteredFoods = foods.value.filter(food =>
-    (food.name && food.name.toLowerCase().includes(searchTerm.value.toLowerCase())) ||
-    (food.shop && food.shop.toLowerCase().includes(searchTerm.value.toLowerCase()))
-  );
+  // 篩選和排序食品
+  const filteredFoods = foods.value
+    .filter(food =>
+      (food.name && food.name.toLowerCase().includes(searchTerm.value.toLowerCase())) ||
+      (food.shop && food.shop.toLowerCase().includes(searchTerm.value.toLowerCase()))
+    )
+    .sort((a, b) => {
+      // 按到期日期排序（由近至遠）
+      if (!a.todate && !b.todate) return 0;
+      if (!a.todate) return 1; // 沒有日期的排在後面
+      if (!b.todate) return -1; // 沒有日期的排在後面
+      
+      const dateA = new Date(a.todate);
+      const dateB = new Date(b.todate);
+      
+      // 檢查日期是否有效
+      if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+      if (isNaN(dateA.getTime())) return 1;
+      if (isNaN(dateB.getTime())) return -1;
+      
+      return dateA.getTime() - dateB.getTime(); // 由近至遠
+    });
 
   return (
     <div class="space-y-6">
