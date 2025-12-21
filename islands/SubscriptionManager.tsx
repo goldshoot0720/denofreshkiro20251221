@@ -298,7 +298,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
           </div>
         ) : (
           filteredSubscriptions.map((subscription) => {
-            const daysLeft = getDaysLeft(subscription.nextPaymentDate);
+            const daysLeft = getDaysLeft(subscription.nextdate);
             return (
               <div key={subscription.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
                 <div class="flex items-center justify-between">
@@ -341,7 +341,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
                           daysLeft <= 3 ? 'text-yellow-400' :
                           'text-green-400'
                         }`}>
-                          {!subscription.nextdate || daysLeft === null ? '未設定' : 
+                          {!subscription.nextdate || daysLeft === null ? '天' : 
                            daysLeft < 0 ? '已過期' : `${daysLeft} 天`}
                         </div>
                       </div>

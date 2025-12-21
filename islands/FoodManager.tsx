@@ -381,7 +381,7 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
                         <span class={`ml-2 font-medium ${getStatusColor('fresh', getDaysLeft(food.todate))}`}>
                           {(() => {
                             const daysLeft = getDaysLeft(food.todate);
-                            if (daysLeft === null) return '日期錯誤';
+                            if (daysLeft === null) return '天';
                             return daysLeft < 0 ? '已過期' : `${daysLeft} 天`;
                           })()}
                         </span>
