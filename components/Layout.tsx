@@ -20,10 +20,12 @@ export default function Layout(
         <Sidebar currentPath={currentPath} />
       </div>
 
-      {/* 移動端導航 */}
-      <MobileNavToggle currentPath={currentPath} />
-
       <div class="flex-1 flex flex-col">
+        {/* 移動端頂部導航 */}
+        <div class="md:hidden">
+          <MobileNavToggle currentPath={currentPath} />
+        </div>
+
         {/* 桌面端頂部 */}
         <header class="hidden md:block bg-white/5 backdrop-blur-sm border-b border-white/10 px-6 py-4">
           <div class="flex items-center justify-between">
