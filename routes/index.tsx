@@ -29,8 +29,8 @@ export default function Home() {
                 <span>🔧</span> 前端技術
               </h3>
               <ul class="text-white/80 text-sm space-y-2">
-                <li>• SolidJS (SolidStart)</li>
-                <li>• 響應式設計 Netlify</li>
+                <li>• Deno Fresh</li>
+                <li>• Deno Deploy</li>
                 <li>• 響應式設計 + Tailwind CSS</li>
               </ul>
             </div>
@@ -40,18 +40,47 @@ export default function Home() {
                 <span>💎</span> 後端技術
               </h3>
               <ul class="text-white/80 text-sm space-y-2">
-                <li>• Strapi CMS</li>
-                <li>• 多平台發佈 Strapi</li>
-                <li>• RESTful API 支援</li>
+                <li>• Back4App</li>
+                <li>• Vercel Blob(abu..17)</li>
+                <li>• 雲端資料庫服務</li>
               </ul>
             </div>
           </div>
         </div>
 
         <div class="text-center">
-          <h3 class="text-yellow-300 font-medium mb-4 flex items-center justify-center gap-2">
+          <h3 class="text-yellow-300 font-medium mb-6 flex items-center justify-center gap-2">
             <span>⭐</span> 系統功能選單
           </h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <a
+              href="/dashboard"
+              class="bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded-xl p-6 transition-all hover:scale-105"
+            >
+              <div class="text-3xl mb-3">📊</div>
+              <h4 class="text-white font-medium mb-2">系統儀表板</h4>
+              <p class="text-white/70 text-sm">統計概覽和快速操作</p>
+            </a>
+            
+            <a
+              href="/subscriptions"
+              class="bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded-xl p-6 transition-all hover:scale-105"
+            >
+              <div class="text-3xl mb-3">📋</div>
+              <h4 class="text-white font-medium mb-2">訂閱管理</h4>
+              <p class="text-white/70 text-sm">管理您的訂閱服務</p>
+            </a>
+            
+            <a
+              href="/food"
+              class="bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 rounded-xl p-6 transition-all hover:scale-105"
+            >
+              <div class="text-3xl mb-3">🍎</div>
+              <h4 class="text-white font-medium mb-2">食品管理</h4>
+              <p class="text-white/70 text-sm">追蹤食品到期日期</p>
+            </a>
+          </div>
         </div>
       </div>
     </Layout>

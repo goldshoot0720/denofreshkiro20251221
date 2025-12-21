@@ -1,4 +1,5 @@
 import Layout from "../components/Layout.tsx";
+import { useState } from "preact/hooks";
 
 export default function Videos() {
   const headerActions = (
@@ -17,14 +18,16 @@ export default function Videos() {
       subtitle: "鋒兄人生傳記影片",
       duration: "00:45",
       size: "2.01 MB",
+      url: "https://oiutapchuu5rrlsr.public.blob.vercel-storage.com/19700121-1829-693fee512bec81918cbfd484c6a5ba8f_enx4rsS0.mp4",
       thumbnail: "/api/placeholder/300/200",
     },
     {
       id: 2,
-      title: "鋒兄雜貨Show 🔴",
-      subtitle: "鋒兄雜貨影片庫",
+      title: "鋒兄進化Show🔥",
+      subtitle: "鋒兄進化精彩內容",
       duration: "01:23",
       size: "4.21 MB",
+      url: "https://oiutapchuu5rrlsr.public.blob.vercel-storage.com/clideo-editor-92eb6755d77b4603a482c25764865a58_7sLjgTgc.mp4",
       thumbnail: "/api/placeholder/300/200",
     },
   ];
@@ -59,9 +62,17 @@ export default function Videos() {
             class="bg-white/10 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/15 transition-colors"
           >
             <div class="relative">
-              <div class="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                <span class="text-white/50 text-4xl">🎬</span>
-              </div>
+              <video
+                class="w-full h-48 object-cover bg-gradient-to-br from-gray-800 to-gray-900"
+                controls
+                preload="metadata"
+                poster={video.thumbnail}
+              >
+                <source src={video.url} type="video/mp4" />
+                <div class="w-full h-48 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                  <span class="text-white/50 text-4xl">🎬</span>
+                </div>
+              </video>
               <div class="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                 MP4
               </div>
@@ -75,6 +86,31 @@ export default function Videos() {
               <div class="flex justify-between items-center text-xs text-white/60">
                 <span>大小: {video.size}</span>
                 <span>時長: {video.duration}</span>
+              </div>
+              <div class="mt-2 flex gap-2">
+                <button
+                  type="button"
+                  class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg text-sm transition-colors"
+                  onClick={() => {
+                    const videoElement = document.querySelector(`video[src*="${video.id}"]`) as HTMLVideoElement;
+                    if (videoElement) {
+                      if (videoElement.paused) {
+                        videoElement.play();
+                      } else {
+                        videoElement.pause();
+                      }
+                    }
+                  }}
+                >
+                  播放/暫停
+                </button>
+                <button
+                  type="button"
+                  class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-sm transition-colors"
+                  onClick={() => window.open(video.url, '_blank')}
+                >
+                  新分頁
+                </button>
               </div>
             </div>
           </div>
