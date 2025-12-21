@@ -5,18 +5,14 @@
 
 import { Handlers } from "$fresh/server.ts";
 import { FoodService } from "../../lib/services/food-service.ts";
-import { Back4AppRestClient } from "../../lib/services/back4app-rest-client.ts";
 import type { CreateFoodData, FoodQueryOptions } from "../../lib/types/models.ts";
 
 const foodService = FoodService.getInstance();
-const back4appClient = Back4AppRestClient.getInstance();
 
 export const handler: Handlers = {
   // GET /api/foods - 取得食品列表
   async GET(req) {
     try {
-      await back4appClient.initialize();
-      
       const url = new URL(req.url);
       const options: FoodQueryOptions = {
         status: url.searchParams.get("status") || undefined,
@@ -53,8 +49,6 @@ export const handler: Handlers = {
   // POST /api/foods - 建立新食品項目
   async POST(req) {
     try {
-      await back4appClient.initialize();
-      
       const data: CreateFoodData = await req.json();
       
       // 驗證必要欄位 (Back4App food 表沒有必填欄位，除了 name)

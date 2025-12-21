@@ -35,6 +35,9 @@ export class FoodService {
    * 建立新食品項目
    */
   async createFood(data: CreateFoodData): Promise<Food> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const foodData = {
       name: data.name,
       amount: data.amount || 1,
@@ -52,6 +55,9 @@ export class FoodService {
    * 取得食品列表
    */
   async getFoods(options: FoodQueryOptions = {}): Promise<Food[]> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const queryOptions: QueryOptions = {
       limit: options.limit || 50,
       skip: options.skip || 0,
@@ -95,6 +101,9 @@ export class FoodService {
    * 取得單一食品項目
    */
   async getFood(objectId: string): Promise<Food | null> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const foods = await this.back4appClient.query<Food>(this.className, {
       where: { objectId },
       limit: 1,
@@ -107,6 +116,9 @@ export class FoodService {
    * 更新食品項目
    */
   async updateFood(objectId: string, data: Partial<CreateFoodData>): Promise<Food> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     // Convert date strings to Date objects if present
     const updateData = { ...data };
     if (updateData.todate) {
@@ -122,6 +134,9 @@ export class FoodService {
    * 刪除食品項目
    */
   async deleteFood(objectId: string): Promise<void> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     await this.back4appClient.delete(this.className, objectId);
   }
 

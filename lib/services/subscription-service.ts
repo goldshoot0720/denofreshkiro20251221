@@ -35,6 +35,9 @@ export class SubscriptionService {
    * 建立新訂閱
    */
   async createSubscription(data: CreateSubscriptionData): Promise<Subscription> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const subscriptionData = {
       name: data.name,
       price: data.price || 0,
@@ -54,6 +57,9 @@ export class SubscriptionService {
    * 取得訂閱列表
    */
   async getSubscriptions(options: SubscriptionQueryOptions = {}): Promise<Subscription[]> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const queryOptions: QueryOptions = {
       limit: options.limit || 50,
       skip: options.skip || 0,
@@ -81,6 +87,9 @@ export class SubscriptionService {
    * 取得單一訂閱
    */
   async getSubscription(objectId: string): Promise<Subscription | null> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     const subscriptions = await this.back4appClient.query<Subscription>(
       this.className,
       {
@@ -99,6 +108,9 @@ export class SubscriptionService {
     objectId: string,
     data: Partial<CreateSubscriptionData>
   ): Promise<Subscription> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     // Convert date strings to Date objects if present
     const updateData = { ...data };
     if (updateData.nextdate) {
@@ -118,6 +130,9 @@ export class SubscriptionService {
    * 刪除訂閱
    */
   async deleteSubscription(objectId: string): Promise<void> {
+    // 確保 Back4App 客戶端已初始化
+    await this.back4appClient.initialize();
+    
     await this.back4appClient.delete(this.className, objectId);
   }
 

@@ -5,18 +5,14 @@
 
 import { Handlers } from "$fresh/server.ts";
 import { SubscriptionService } from "../../lib/services/subscription-service.ts";
-import { Back4AppRestClient } from "../../lib/services/back4app-rest-client.ts";
 import type { CreateSubscriptionData, SubscriptionQueryOptions } from "../../lib/types/models.ts";
 
 const subscriptionService = SubscriptionService.getInstance();
-const back4appClient = Back4AppRestClient.getInstance();
 
 export const handler: Handlers = {
   // GET /api/subscriptions - 取得訂閱列表
   async GET(req) {
     try {
-      await back4appClient.initialize();
-      
       const url = new URL(req.url);
       const options: SubscriptionQueryOptions = {
         status: url.searchParams.get("status") || undefined,
@@ -51,8 +47,6 @@ export const handler: Handlers = {
   // POST /api/subscriptions - 建立新訂閱
   async POST(req) {
     try {
-      await back4appClient.initialize();
-      
       const data: CreateSubscriptionData = await req.json();
       
       // 驗證必要欄位
