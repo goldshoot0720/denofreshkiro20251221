@@ -26,13 +26,6 @@ const formData = signal<CreateSubscriptionData>({
   site: "",
   account: "",
   note: "",
-  
-  // 前端額外欄位
-  category: "",
-  currency: "TWD",
-  billingCycle: "monthly",
-  status: "active",
-  reminderDays: 3,
 });
 
 // 載入訂閱列表
@@ -134,13 +127,6 @@ const resetForm = () => {
     site: "",
     account: "",
     note: "",
-    
-    // 前端額外欄位
-    category: "",
-    currency: "TWD",
-    billingCycle: "monthly",
-    status: "active",
-    reminderDays: 3,
   };
   showAddForm.value = false;
   editingSubscription.value = null;
@@ -155,13 +141,6 @@ const startEdit = (subscription: Subscription) => {
     site: subscription.site || "",
     account: subscription.account || "",
     note: subscription.note || "",
-    
-    // 前端額外欄位
-    category: subscription.category || "",
-    currency: subscription.currency || "TWD",
-    billingCycle: subscription.billingCycle || "monthly",
-    status: subscription.status || "active",
-    reminderDays: subscription.reminderDays || 3,
   };
   editingSubscription.value = subscription;
   showAddForm.value = true;
@@ -190,7 +169,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
   // 篩選訂閱
   const filteredSubscriptions = subscriptions.value.filter(sub =>
     sub.name.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
-    (sub.category && sub.category.toLowerCase().includes(searchTerm.value.toLowerCase()))
+    (sub.note && sub.note.toLowerCase().includes(searchTerm.value.toLowerCase()))
   );
 
   return (
@@ -207,7 +186,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
         <div class="relative flex-1">
           <input
             type="text"
-            placeholder="搜尋訂閱名稱或分類..."
+            placeholder="搜尋訂閱名稱或備註..."
             value={searchTerm.value}
             onInput={(e) => searchTerm.value = (e.target as HTMLInputElement).value}
             class="w-full bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
@@ -242,14 +221,6 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
               placeholder="訂閱名稱"
               value={formData.value.name}
               onInput={(e) => formData.value = { ...formData.value, name: (e.target as HTMLInputElement).value }}
-              class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
-            />
-            
-            <input
-              type="text"
-              placeholder="分類"
-              value={formData.value.category}
-              onInput={(e) => formData.value = { ...formData.value, category: (e.target as HTMLInputElement).value }}
               class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
             />
             
@@ -329,11 +300,6 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
                   <div class="flex-1">
                     <div class="flex items-center gap-3 mb-2">
                       <h3 class="text-white font-medium text-lg">{subscription.name}</h3>
-                      {subscription.category && (
-                        <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">
-                          {subscription.category}
-                        </span>
-                      )}
                       {subscription.status && (
                         <span class={`px-2 py-1 rounded text-xs ${
                           subscription.status === 'active' ? 'bg-green-500/20 text-green-300' :
