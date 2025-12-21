@@ -5,80 +5,121 @@ export default function Home() {
     <Layout
       currentPath="/"
       title="鋒兄AI資訊系統"
-      subtitle="智能管理您的影片和圖片收藏，支援智能分類和快速搜尋"
+      subtitle="智能管理您的訂閱和食品，支援智能分類和快速搜尋"
     >
-      <div class="max-w-4xl mx-auto text-center">
-        <div class="mb-8">
+      <div class="max-w-4xl mx-auto">
+        {/* 歡迎區域 */}
+        <div class="text-center mb-6 sm:mb-8">
           <div class="w-16 h-16 bg-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <span class="text-white text-2xl font-bold">鋒</span>
           </div>
-          <h1 class="text-3xl font-bold text-white mb-4">鋒兄AI資訊系統</h1>
-          <p class="text-white/80 text-lg mb-8">
-            智能管理您的影片和圖片收藏，支援智能分類和快速搜尋
+          <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-4">鋒兄AI資訊系統</h1>
+          <p class="text-white/80 text-sm sm:text-lg">
+            智能管理您的訂閱和食品，支援智能分類和快速搜尋
           </p>
         </div>
 
-        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
-          <p class="text-white/90 mb-6">
-            鋒兄資訊公開資訊 © 版權所有 2025 - 2125
-          </p>
-
-          <div class="grid md:grid-cols-2 gap-8">
-            <div>
-              <h3 class="text-orange-300 font-medium mb-4 flex items-center gap-2">
-                <span>🔧</span> 前端技術
-              </h3>
-              <ul class="text-white/80 text-sm space-y-2">
-                <li>• Deno Fresh</li>
-                <li>• Deno Deploy</li>
-                <li>• 響應式設計 + Tailwind CSS</li>
-              </ul>
+        {/* 主要功能卡片 */}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+          {/* 首頁卡片 */}
+          <a href="/" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">🏠</span>
+              </div>
+              <h3 class="text-white font-medium text-lg">首頁</h3>
             </div>
+            <p class="text-white/70 text-sm">系統主頁面和功能導航</p>
+          </a>
 
-            <div>
-              <h3 class="text-pink-300 font-medium mb-4 flex items-center gap-2">
-                <span>💎</span> 後端技術
-              </h3>
-              <ul class="text-white/80 text-sm space-y-2">
-                <li>• Back4App</li>
-                <li>• Vercel Blob(abu..17)</li>
-                <li>• 雲端資料庫服務</li>
-              </ul>
+          {/* 儀表板卡片 */}
+          <a href="/dashboard" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">📊</span>
+              </div>
+              <h3 class="text-white font-medium text-lg">儀表板</h3>
             </div>
-          </div>
+            <p class="text-white/70 text-sm">訂閱管理與食品管理系統統計概覽</p>
+          </a>
+
+          {/* 訂閱管理卡片 */}
+          <a href="/subscriptions" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">📋</span>
+              </div>
+              <h3 class="text-white font-medium text-lg">訂閱管理</h3>
+            </div>
+            <p class="text-white/70 text-sm mb-2">合約訂閱和帳單管理</p>
+            <div class="text-xs text-white/50">
+              公開資訊 © 版權所有 2025 ~ 2125
+            </div>
+          </a>
+
+          {/* 食品管理卡片 */}
+          <a href="/food" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
+                <span class="text-2xl">🍎</span>
+              </div>
+              <h3 class="text-white font-medium text-lg">食品管理</h3>
+            </div>
+            <p class="text-white/70 text-sm">食品存放和到期提醒</p>
+          </a>
         </div>
 
-        <div class="text-center">
-          <h3 class="text-yellow-300 font-medium mb-6 flex items-center justify-center gap-2">
-            <span>⭐</span> 系統功能選單
+        {/* 技術資訊區域 */}
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 mb-6 border border-white/10">
+          <h3 class="text-orange-300 font-medium text-lg mb-4 flex items-center gap-2">
+            <span>🔧</span> 前端技術
           </h3>
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <a
-              href="/dashboard"
-              class="bg-blue-500/20 hover:bg-blue-500/30 border border-blue-500/30 rounded-xl p-6 transition-all hover:scale-105"
-            >
-              <div class="text-3xl mb-3">📊</div>
-              <h4 class="text-white font-medium mb-2">系統儀表板</h4>
-              <p class="text-white/70 text-sm">統計概覽和快速操作</p>
-            </a>
-            
+          <ul class="text-white/80 text-sm space-y-2 mb-6">
+            <li>• SolidJS (SolidStart)</li>
+            <li>• 網頁存放於 Netlify</li>
+            <li>• 響應式設計 + Tailwind CSS</li>
+          </ul>
+
+          <h3 class="text-pink-300 font-medium text-lg mb-4 flex items-center gap-2">
+            <span>💎</span> 後端技術
+          </h3>
+          <ul class="text-white/80 text-sm space-y-2">
+            <li>• Strapi CMS</li>
+            <li>• 影片存放於 Strapi</li>
+          </ul>
+        </div>
+
+        {/* 快速操作區域 */}
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/10">
+          <h3 class="text-white font-medium text-lg mb-4">快速操作</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <a
               href="/subscriptions"
-              class="bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/30 rounded-xl p-6 transition-all hover:scale-105"
+              class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 p-3 rounded-lg text-center transition-colors"
             >
-              <div class="text-3xl mb-3">📋</div>
-              <h4 class="text-white font-medium mb-2">訂閱管理</h4>
-              <p class="text-white/70 text-sm">管理您的訂閱服務</p>
+              <div class="text-xl mb-1">📋</div>
+              <div class="text-xs">新增訂閱</div>
             </a>
-            
             <a
               href="/food"
-              class="bg-green-500/20 hover:bg-green-500/30 border border-green-500/30 rounded-xl p-6 transition-all hover:scale-105"
+              class="bg-green-500/20 hover:bg-green-500/30 text-green-300 p-3 rounded-lg text-center transition-colors"
             >
-              <div class="text-3xl mb-3">🍎</div>
-              <h4 class="text-white font-medium mb-2">食品管理</h4>
-              <p class="text-white/70 text-sm">追蹤食品到期日期</p>
+              <div class="text-xl mb-1">🍎</div>
+              <div class="text-xs">新增食品</div>
+            </a>
+            <a
+              href="/dashboard"
+              class="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 p-3 rounded-lg text-center transition-colors"
+            >
+              <div class="text-xl mb-1">📊</div>
+              <div class="text-xs">查看統計</div>
+            </a>
+            <a
+              href="/demo"
+              class="bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 p-3 rounded-lg text-center transition-colors"
+            >
+              <div class="text-xl mb-1">🎯</div>
+              <div class="text-xs">系統展示</div>
             </a>
           </div>
         </div>
