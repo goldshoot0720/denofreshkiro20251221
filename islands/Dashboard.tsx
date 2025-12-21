@@ -77,16 +77,48 @@ const loadDashboardData = async () => {
     ]);
 
     if (statsResult.success && subscriptionsResult.success && foodsResult.success) {
-      // 處理日期格式
-      const processedSubscriptions = subscriptionsResult.data.map((sub: any) => ({
-        ...sub,
-        nextdate: sub.nextdate?.iso ? sub.nextdate.iso.split('T')[0] : sub.nextdate,
-      }));
+      // 處理日期格式並排序
+      const processedSubscriptions = subscriptionsResult.data
+        .map((sub: any) => ({
+          ...sub,
+          nextdate: sub.nextdate?.iso ? sub.nextdate.iso.split('T')[0] : sub.nextdate,
+        }))
+        .sort((a: any, b: any) => {
+          // 按下次付款日期排序（由近至遠）
+          if (!a.nextdate && !b.nextdate) return 0;
+          if (!a.nextdate) return 1;
+          if (!b.nextdate) return -1;
+          
+          const dateA = new Date(a.nextdate);
+          const dateB = new Date(b.nextdate);
+          
+          if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+          if (isNaN(dateA.getTime())) return 1;
+          if (isNaN(dateB.getTime())) return -1;
+          
+          return dateA.getTime() - dateB.getTime();
+        });
 
-      const processedFoods = foodsResult.data.map((food: any) => ({
-        ...food,
-        todate: food.todate?.iso ? food.todate.iso.split('T')[0] : food.todate,
-      }));
+      const processedFoods = foodsResult.data
+        .map((food: any) => ({
+          ...food,
+          todate: food.todate?.iso ? food.todate.iso.split('T')[0] : food.todate,
+        }))
+        .sort((a: any, b: any) => {
+          // 按到期日期排序（由近至遠）
+          if (!a.todate && !b.todate) return 0;
+          if (!a.todate) return 1;
+          if (!b.todate) return -1;
+          
+          const dateA = new Date(a.todate);
+          const dateB = new Date(b.todate);
+          
+          if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
+          if (isNaN(dateA.getTime())) return 1;
+          if (isNaN(dateB.getTime())) return -1;
+          
+          return dateA.getTime() - dateB.getTime();
+        });
 
       // 計算即將到期的項目
       const today = new Date();
@@ -95,17 +127,29 @@ const loadDashboardData = async () => {
       const sevenDaysFromNow = new Date();
       sevenDaysFromNow.setDate(today.getDate() + 7);
 
-      const expiringSubscriptions = processedSubscriptions.filter((sub: any) => {
-        if (!sub.nextdate) return false;
-        const nextDate = new Date(sub.nextdate);
-        return nextDate >= today && nextDate <= sevenDaysFromNow;
-      });
+      const expiringSubscriptions = processedSubscriptions
+        .filter((sub: any) => {
+          if (!sub.nextdate) return false;
+          const nextDate = new Date(sub.nextdate);
+          return nextDate >= today && nextDate <= sevenDaysFromNow;
+        })
+        .sort((a: any, b: any) => {
+          const dateA = new Date(a.nextdate);
+          const dateB = new Date(b.nextdate);
+          return dateA.getTime() - dateB.getTime();
+        });
 
-      const expiringFoods = processedFoods.filter((food: any) => {
-        if (!food.todate) return false;
-        const expiryDate = new Date(food.todate);
-        return expiryDate >= today && expiryDate <= sevenDaysFromNow;
-      });
+      const expiringFoods = processedFoods
+        .filter((food: any) => {
+          if (!food.todate) return false;
+          const expiryDate = new Date(food.todate);
+          return expiryDate >= today && expiryDate <= sevenDaysFromNow;
+        })
+        .sort((a: any, b: any) => {
+          const dateA = new Date(a.todate);
+          const dateB = new Date(b.todate);
+          return dateA.getTime() - dateB.getTime();
+        });
 
       dashboardData.value = {
         stats: statsResult.data,
