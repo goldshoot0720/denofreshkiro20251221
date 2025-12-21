@@ -273,6 +273,14 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
               onInput={(e) => formData.value = { ...formData.value, todate: (e.target as HTMLInputElement).value }}
               class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/40"
             />
+            
+            <input
+              type="url"
+              placeholder="照片 URL (選填)"
+              value={formData.value.photo}
+              onInput={(e) => formData.value = { ...formData.value, photo: (e.target as HTMLInputElement).value }}
+              class="bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/40"
+            />
           </div>
           
           <textarea
@@ -315,8 +323,21 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
             return (
               <div key={food.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
                 <div class="flex gap-4">
-                  <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center">
-                    <span class="text-white text-2xl">🍿</span>
+                  {/* 食品圖片或預設圖示 */}
+                  <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center overflow-hidden">
+                    {food.photo ? (
+                      <img 
+                        src={food.photo} 
+                        alt={food.name || "食品照片"} 
+                        class="w-full h-full object-cover"
+                        onError={(e) => {
+                          // 圖片載入失敗時顯示預設圖示
+                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).nextElementSibling!.style.display = 'flex';
+                        }}
+                      />
+                    ) : null}
+                    <span class={`text-white text-2xl ${food.photo ? 'hidden' : ''}`}>🍿</span>
                   </div>
 
                   <div class="flex-1">
