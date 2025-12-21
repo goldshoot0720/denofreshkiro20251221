@@ -221,7 +221,7 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
       )}
 
       {/* 搜尋和操作列 */}
-      <div class="flex gap-4">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <div class="relative flex-1">
           <input
             type="text"
@@ -232,29 +232,31 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
           />
           <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 text-lg">🔍</span>
         </div>
-        <button
-          onClick={() => showAddForm.value = true}
-          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-        >
-          <span>🍎</span> 添加食品
-        </button>
-        <button
-          onClick={loadFoods}
-          disabled={loading.value}
-          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 disabled:opacity-50"
-        >
-          <span>🔄</span> 重新載入
-        </button>
+        <div class="flex gap-2 sm:gap-3">
+          <button
+            onClick={() => showAddForm.value = true}
+            class="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex items-center gap-1 sm:gap-2 flex-1 sm:flex-none justify-center"
+          >
+            <span>🍎</span> <span class="hidden sm:inline">添加食品</span><span class="sm:hidden">添加</span>
+          </button>
+          <button
+            onClick={loadFoods}
+            disabled={loading.value}
+            class="bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex items-center gap-1 sm:gap-2 disabled:opacity-50 flex-1 sm:flex-none justify-center"
+          >
+            <span>🔄</span> <span class="hidden sm:inline">重新載入</span><span class="sm:hidden">載入</span>
+          </button>
+        </div>
       </div>
 
       {/* 新增/編輯表單 */}
       {showAddForm.value && (
-        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-          <h3 class="text-white font-medium text-lg mb-4">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+          <h3 class="text-white font-medium text-base sm:text-lg mb-3 sm:mb-4">
             {editingFood.value ? "編輯食品" : "新增食品"}
           </h3>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="食品名稱"
@@ -313,26 +315,26 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
             rows={3}
           />
           
-          <div class="flex gap-2 mt-4">
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4">
             <button
               onClick={saveFood}
               disabled={loading.value || !formData.value.name}
-              class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+              class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {loading.value ? "儲存中..." : "儲存"}
+              <span>💾</span> {loading.value ? "儲存中..." : "儲存"}
             </button>
             <button
               onClick={resetForm}
-              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2"
             >
-              取消
+              <span>❌</span> 取消
             </button>
           </div>
         </div>
       )}
 
       {/* 食品列表 */}
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
         {loading.value && foods.value.length === 0 ? (
           <div class="col-span-full text-center text-white/60 py-8">載入中...</div>
         ) : filteredFoods.length === 0 ? (
@@ -343,10 +345,10 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
           filteredFoods.map((food) => {
             const daysLeft = getDaysLeft(food.todate || "");
             return (
-              <div key={food.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                <div class="flex gap-4">
+              <div key={food.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                   {/* 食品圖片或預設圖示 */}
-                  <div class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center overflow-hidden">
+                  <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center overflow-hidden mx-auto sm:mx-0 flex-shrink-0">
                     {food.photo ? (
                       <img 
                         src={food.photo} 
@@ -363,11 +365,11 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
                   </div>
 
                   <div class="flex-1">
-                    <div class="flex items-center gap-2 mb-2">
-                      <h3 class="text-white font-medium">{food.name}</h3>
+                    <div class="flex items-center gap-2 mb-2 justify-center sm:justify-start">
+                      <h3 class="text-white font-medium text-base sm:text-lg">{food.name}</h3>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                       <div>
                         <span class="text-white/60">數量:</span>
                         <span class="text-white ml-2">{food.amount || 1}</span>
@@ -410,9 +412,9 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
                 <div class="flex gap-2 mt-4">
                   <button
                     onClick={() => startEdit(food)}
-                    class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg text-sm"
+                    class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg text-sm flex items-center justify-center gap-2"
                   >
-                    編輯
+                    <span>✏️</span> 編輯
                   </button>
                   <button
                     onClick={() => deleteFood(food.objectId)}

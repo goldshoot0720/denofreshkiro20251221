@@ -187,15 +187,15 @@ export default function Dashboard() {
       )}
 
       {/* 頁面標題和重新載入按鈕 */}
-      <div class="flex justify-between items-center">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h1 class="text-3xl font-bold text-white mb-2">系統儀表板</h1>
-          <p class="text-white/70">訂閱管理與食品管理系統統計概覽</p>
+          <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">系統儀表板</h1>
+          <p class="text-white/70 text-sm sm:text-base">訂閱管理與食品管理系統統計概覽</p>
         </div>
         <button
           onClick={loadDashboardData}
           disabled={loading.value}
-          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 disabled:opacity-50"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 disabled:opacity-50 self-start sm:self-auto"
         >
           <span>🔄</span> {loading.value ? "載入中..." : "重新載入"}
         </button>
@@ -206,55 +206,55 @@ export default function Dashboard() {
       ) : (
         <div class="space-y-8">
           {/* 統計卡片 */}
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
             {/* 訂閱管理統計 */}
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">📋</span>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+              <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <span class="text-2xl sm:text-3xl">📋</span>
                 <div>
-                  <h2 class="text-xl font-semibold text-white">訂閱管理</h2>
-                  <p class="text-white/60 text-sm">合約訂閱和帳單管理</p>
+                  <h2 class="text-lg sm:text-xl font-semibold text-white">訂閱管理</h2>
+                  <p class="text-white/60 text-xs sm:text-sm">合約訂閱和帳單管理</p>
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-white/5 rounded-lg p-4">
-                  <div class="text-2xl font-bold text-white">{subscriptionStats.total}</div>
-                  <div class="text-white/60 text-sm">項目總數</div>
+              <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div class="bg-white/5 rounded-lg p-3 sm:p-4">
+                  <div class="text-xl sm:text-2xl font-bold text-white">{subscriptionStats.total}</div>
+                  <div class="text-white/60 text-xs sm:text-sm">項目總數</div>
                 </div>
-                <div class="bg-white/5 rounded-lg p-4">
-                  <div class="text-2xl font-bold text-green-400">TWD {subscriptionStats.totalMonthlySpending}</div>
-                  <div class="text-white/60 text-sm">月度支出</div>
+                <div class="bg-white/5 rounded-lg p-3 sm:p-4">
+                  <div class="text-lg sm:text-2xl font-bold text-green-400">TWD {subscriptionStats.totalMonthlySpending}</div>
+                  <div class="text-white/60 text-xs sm:text-sm">月度支出</div>
                 </div>
               </div>
 
-              <div class="space-y-3">
-                <div class="flex justify-between items-center p-3 bg-red-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-red-400">⚠️</span>
-                    <span class="text-white">3天內到期</span>
+              <div class="space-y-2 sm:space-y-3">
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-red-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-red-400 text-sm sm:text-base">⚠️</span>
+                    <span class="text-white text-sm sm:text-base">3天內到期</span>
                   </div>
-                  <span class="text-red-400 font-semibold">{subscriptionStats.expiring3Days} 項</span>
+                  <span class="text-red-400 font-semibold text-sm sm:text-base">{subscriptionStats.expiring3Days} 項</span>
                 </div>
                 
-                <div class="flex justify-between items-center p-3 bg-yellow-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-yellow-400">⏰</span>
-                    <span class="text-white">7天內到期</span>
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-yellow-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-yellow-400 text-sm sm:text-base">⏰</span>
+                    <span class="text-white text-sm sm:text-base">7天內到期</span>
                   </div>
-                  <span class="text-yellow-400 font-semibold">{subscriptionStats.expiring7Days} 項</span>
+                  <span class="text-yellow-400 font-semibold text-sm sm:text-base">{subscriptionStats.expiring7Days} 項</span>
                 </div>
 
-                <div class="flex justify-between items-center p-3 bg-gray-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-gray-400">❌</span>
-                    <span class="text-white">已過期</span>
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-gray-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">❌</span>
+                    <span class="text-white text-sm sm:text-base">已過期</span>
                   </div>
-                  <span class="text-gray-400 font-semibold">{subscriptionStats.expired} 項</span>
+                  <span class="text-gray-400 font-semibold text-sm sm:text-base">{subscriptionStats.expired} 項</span>
                 </div>
               </div>
 
-              <div class="mt-6">
+              <div class="mt-4 sm:mt-6">
                 <a
                   href="/subscriptions"
                   class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-center block transition-colors"
@@ -265,53 +265,53 @@ export default function Dashboard() {
             </div>
 
             {/* 食品管理統計 */}
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div class="flex items-center gap-3 mb-6">
-                <span class="text-3xl">🍎</span>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+              <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <span class="text-2xl sm:text-3xl">🍎</span>
                 <div>
-                  <h2 class="text-xl font-semibold text-white">食品管理</h2>
-                  <p class="text-white/60 text-sm">食品存放和到期提醒</p>
+                  <h2 class="text-lg sm:text-xl font-semibold text-white">食品管理</h2>
+                  <p class="text-white/60 text-xs sm:text-sm">食品存放和到期提醒</p>
                 </div>
               </div>
 
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-white/5 rounded-lg p-4">
-                  <div class="text-2xl font-bold text-white">{foodStats.total}</div>
-                  <div class="text-white/60 text-sm">項目總數</div>
+              <div class="grid grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div class="bg-white/5 rounded-lg p-3 sm:p-4">
+                  <div class="text-xl sm:text-2xl font-bold text-white">{foodStats.total}</div>
+                  <div class="text-white/60 text-xs sm:text-sm">項目總數</div>
                 </div>
-                <div class="bg-white/5 rounded-lg p-4">
-                  <div class="text-2xl font-bold text-green-400">TWD {foodStats.totalValue}</div>
-                  <div class="text-white/60 text-sm">總價值</div>
+                <div class="bg-white/5 rounded-lg p-3 sm:p-4">
+                  <div class="text-lg sm:text-2xl font-bold text-green-400">TWD {foodStats.totalValue}</div>
+                  <div class="text-white/60 text-xs sm:text-sm">總價值</div>
                 </div>
               </div>
 
-              <div class="space-y-3">
-                <div class="flex justify-between items-center p-3 bg-yellow-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-yellow-400">⏰</span>
-                    <span class="text-white">7天內到期</span>
+              <div class="space-y-2 sm:space-y-3">
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-yellow-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-yellow-400 text-sm sm:text-base">⏰</span>
+                    <span class="text-white text-sm sm:text-base">7天內到期</span>
                   </div>
-                  <span class="text-yellow-400 font-semibold">{foodStats.expiring7Days} 項</span>
+                  <span class="text-yellow-400 font-semibold text-sm sm:text-base">{foodStats.expiring7Days} 項</span>
                 </div>
                 
-                <div class="flex justify-between items-center p-3 bg-orange-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-orange-400">📅</span>
-                    <span class="text-white">30天內到期</span>
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-orange-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-orange-400 text-sm sm:text-base">📅</span>
+                    <span class="text-white text-sm sm:text-base">30天內到期</span>
                   </div>
-                  <span class="text-orange-400 font-semibold">{foodStats.expiring30Days} 項</span>
+                  <span class="text-orange-400 font-semibold text-sm sm:text-base">{foodStats.expiring30Days} 項</span>
                 </div>
 
-                <div class="flex justify-between items-center p-3 bg-red-500/20 rounded-lg">
-                  <div class="flex items-center gap-2">
-                    <span class="text-red-400">❌</span>
-                    <span class="text-white">已過期</span>
+                <div class="flex justify-between items-center p-2 sm:p-3 bg-red-500/20 rounded-lg">
+                  <div class="flex items-center gap-1 sm:gap-2">
+                    <span class="text-red-400 text-sm sm:text-base">❌</span>
+                    <span class="text-white text-sm sm:text-base">已過期</span>
                   </div>
-                  <span class="text-red-400 font-semibold">{foodStats.expired} 項</span>
+                  <span class="text-red-400 font-semibold text-sm sm:text-base">{foodStats.expired} 項</span>
                 </div>
               </div>
 
-              <div class="mt-6">
+              <div class="mt-4 sm:mt-6">
                 <a
                   href="/food"
                   class="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-center block transition-colors"
@@ -323,29 +323,29 @@ export default function Dashboard() {
           </div>
 
           {/* 項目列表區域 */}
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
             {/* 最近訂閱項目 */}
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-white">最近訂閱</h3>
-                <a href="/subscriptions" class="text-blue-400 hover:text-blue-300 text-sm">查看全部 →</a>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+              <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 class="text-base sm:text-lg font-semibold text-white">最近訂閱</h3>
+                <a href="/subscriptions" class="text-blue-400 hover:text-blue-300 text-xs sm:text-sm">查看全部 →</a>
               </div>
               
               {dashboardData.value.recentSubscriptions.length === 0 ? (
-                <div class="text-center text-white/60 py-4">暫無訂閱項目</div>
+                <div class="text-center text-white/60 py-3 sm:py-4 text-sm">暫無訂閱項目</div>
               ) : (
-                <div class="space-y-3">
+                <div class="space-y-2 sm:space-y-3">
                   {dashboardData.value.recentSubscriptions.map((subscription: any) => (
-                    <div key={subscription.objectId} class="bg-white/5 rounded-lg p-3">
+                    <div key={subscription.objectId} class="bg-white/5 rounded-lg p-2 sm:p-3">
                       <div class="flex items-center justify-between">
-                        <div>
-                          <h4 class="text-white font-medium">{subscription.name}</h4>
-                          <p class="text-white/60 text-sm">
+                        <div class="flex-1 min-w-0">
+                          <h4 class="text-white font-medium text-sm sm:text-base truncate">{subscription.name}</h4>
+                          <p class="text-white/60 text-xs sm:text-sm">
                             {subscription.nextdate ? `下次付款: ${subscription.nextdate}` : '未設定付款日期'}
                           </p>
                         </div>
-                        <div class="text-right">
-                          <div class="text-white font-medium">TWD {subscription.price || 0}</div>
+                        <div class="text-right ml-2 flex-shrink-0">
+                          <div class="text-white font-medium text-sm sm:text-base">TWD {subscription.price || 0}</div>
                           {subscription.nextdate && (
                             <div class="text-xs text-white/60">
                               {(() => {
@@ -373,21 +373,21 @@ export default function Dashboard() {
             </div>
 
             {/* 最近食品項目 */}
-            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-              <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-white">最近食品</h3>
-                <a href="/food" class="text-green-400 hover:text-green-300 text-sm">查看全部 →</a>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+              <div class="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 class="text-base sm:text-lg font-semibold text-white">最近食品</h3>
+                <a href="/food" class="text-green-400 hover:text-green-300 text-xs sm:text-sm">查看全部 →</a>
               </div>
               
               {dashboardData.value.recentFoods.length === 0 ? (
-                <div class="text-center text-white/60 py-4">暫無食品項目</div>
+                <div class="text-center text-white/60 py-3 sm:py-4 text-sm">暫無食品項目</div>
               ) : (
-                <div class="space-y-3">
+                <div class="space-y-2 sm:space-y-3">
                   {dashboardData.value.recentFoods.map((food: any) => (
-                    <div key={food.objectId} class="bg-white/5 rounded-lg p-3">
+                    <div key={food.objectId} class="bg-white/5 rounded-lg p-2 sm:p-3">
                       <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                          <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center overflow-hidden">
+                        <div class="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                          <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
                             {food.photo ? (
                               <img 
                                 src={food.photo} 
@@ -399,18 +399,18 @@ export default function Dashboard() {
                                 }}
                               />
                             ) : null}
-                            <span class={`text-white text-sm ${food.photo ? 'hidden' : ''}`}>🍿</span>
+                            <span class={`text-white text-xs sm:text-sm ${food.photo ? 'hidden' : ''}`}>🍿</span>
                           </div>
-                          <div>
-                            <h4 class="text-white font-medium">{food.name || '未命名'}</h4>
-                            <p class="text-white/60 text-sm">
+                          <div class="flex-1 min-w-0">
+                            <h4 class="text-white font-medium text-sm sm:text-base truncate">{food.name || '未命名'}</h4>
+                            <p class="text-white/60 text-xs sm:text-sm">
                               數量: {food.amount || 1} {food.shop && `• ${food.shop}`}
                             </p>
                           </div>
                         </div>
-                        <div class="text-right">
+                        <div class="text-right ml-2 flex-shrink-0">
                           {food.price && food.price > 0 && (
-                            <div class="text-white font-medium">TWD {food.price}</div>
+                            <div class="text-white font-medium text-sm sm:text-base">TWD {food.price}</div>
                           )}
                           {food.todate && (
                             <div class="text-xs text-white/60">
@@ -486,36 +486,36 @@ export default function Dashboard() {
       )}
 
       {/* 快速操作區域 */}
-      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-        <h3 class="text-lg font-semibold text-white mb-4">快速操作</h3>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+        <h3 class="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">快速操作</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <a
             href="/subscriptions"
-            class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 p-4 rounded-lg text-center transition-colors"
+            class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 p-3 sm:p-4 rounded-lg text-center transition-colors"
           >
-            <div class="text-2xl mb-2">📋</div>
-            <div class="text-sm">新增訂閱</div>
+            <div class="text-xl sm:text-2xl mb-1 sm:mb-2">📋</div>
+            <div class="text-xs sm:text-sm">新增訂閱</div>
           </a>
           <a
             href="/food"
-            class="bg-green-500/20 hover:bg-green-500/30 text-green-300 p-4 rounded-lg text-center transition-colors"
+            class="bg-green-500/20 hover:bg-green-500/30 text-green-300 p-3 sm:p-4 rounded-lg text-center transition-colors"
           >
-            <div class="text-2xl mb-2">🍎</div>
-            <div class="text-sm">新增食品</div>
+            <div class="text-xl sm:text-2xl mb-1 sm:mb-2">🍎</div>
+            <div class="text-xs sm:text-sm">新增食品</div>
           </a>
           <a
             href="/demo"
-            class="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 p-4 rounded-lg text-center transition-colors"
+            class="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 p-3 sm:p-4 rounded-lg text-center transition-colors"
           >
-            <div class="text-2xl mb-2">🎯</div>
-            <div class="text-sm">系統展示</div>
+            <div class="text-xl sm:text-2xl mb-1 sm:mb-2">🎯</div>
+            <div class="text-xs sm:text-sm">系統展示</div>
           </a>
           <button
             onClick={loadDashboardData}
-            class="bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 p-4 rounded-lg text-center transition-colors"
+            class="bg-gray-500/20 hover:bg-gray-500/30 text-gray-300 p-3 sm:p-4 rounded-lg text-center transition-colors"
           >
-            <div class="text-2xl mb-2">🔄</div>
-            <div class="text-sm">重新載入</div>
+            <div class="text-xl sm:text-2xl mb-1 sm:mb-2">🔄</div>
+            <div class="text-xs sm:text-sm">重新載入</div>
           </button>
         </div>
       </div>

@@ -204,7 +204,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
       )}
 
       {/* 搜尋和操作列 */}
-      <div class="flex gap-4">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <div class="relative flex-1">
           <input
             type="text"
@@ -215,29 +215,31 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
           />
           <span class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/70 text-lg">🔍</span>
         </div>
-        <button
-          onClick={() => showAddForm.value = true}
-          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
-        >
-          <span>📋</span> 添加訂閱
-        </button>
-        <button
-          onClick={loadSubscriptions}
-          disabled={loading.value}
-          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 disabled:opacity-50"
-        >
-          <span>🔄</span> 重新載入
-        </button>
+        <div class="flex gap-2 sm:gap-3">
+          <button
+            onClick={() => showAddForm.value = true}
+            class="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex items-center gap-1 sm:gap-2 flex-1 sm:flex-none justify-center"
+          >
+            <span>📋</span> <span class="hidden sm:inline">添加訂閱</span><span class="sm:hidden">添加</span>
+          </button>
+          <button
+            onClick={loadSubscriptions}
+            disabled={loading.value}
+            class="bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex items-center gap-1 sm:gap-2 disabled:opacity-50 flex-1 sm:flex-none justify-center"
+          >
+            <span>🔄</span> <span class="hidden sm:inline">重新載入</span><span class="sm:hidden">載入</span>
+          </button>
+        </div>
       </div>
 
       {/* 新增/編輯表單 */}
       {showAddForm.value && (
-        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-          <h3 class="text-white font-medium text-lg mb-4">
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+          <h3 class="text-white font-medium text-base sm:text-lg mb-3 sm:mb-4">
             {editingSubscription.value ? "編輯訂閱" : "新增訂閱"}
           </h3>
           
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <input
               type="text"
               placeholder="訂閱名稱"
@@ -287,19 +289,19 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
             rows={3}
           />
           
-          <div class="flex gap-2 mt-4">
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-4">
             <button
               onClick={saveSubscription}
               disabled={loading.value || !formData.value.name}
-              class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+              class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              {loading.value ? "儲存中..." : "儲存"}
+              <span>💾</span> {loading.value ? "儲存中..." : "儲存"}
             </button>
             <button
               onClick={resetForm}
-              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+              class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center justify-center gap-2"
             >
-              取消
+              <span>❌</span> 取消
             </button>
           </div>
         </div>
@@ -317,13 +319,13 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
           filteredSubscriptions.map((subscription) => {
             const daysLeft = getDaysLeft(subscription.nextdate);
             return (
-              <div key={subscription.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
-                <div class="flex items-center justify-between">
+              <div key={subscription.objectId} class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                   <div class="flex-1">
-                    <div class="flex items-center gap-3 mb-2">
-                      <h3 class="text-white font-medium text-lg">{subscription.name}</h3>
+                    <div class="flex items-center gap-2 sm:gap-3 mb-3">
+                      <h3 class="text-white font-medium text-base sm:text-lg truncate">{subscription.name}</h3>
                       {subscription.status && (
-                        <span class={`px-2 py-1 rounded text-xs ${
+                        <span class={`px-2 py-1 rounded text-xs flex-shrink-0 ${
                           subscription.status === 'active' ? 'bg-green-500/20 text-green-300' :
                           subscription.status === 'paused' ? 'bg-yellow-500/20 text-yellow-300' :
                           'bg-red-500/20 text-red-300'
@@ -333,7 +335,7 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
                       )}
                     </div>
 
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 text-sm">
                       {subscription.site && (
                         <div>
                           <span class="text-white/60">網站:</span>
@@ -377,16 +379,16 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
                     </div>
                   </div>
 
-                  <div class="flex gap-2 ml-4">
+                  <div class="flex gap-2 lg:ml-4 lg:flex-shrink-0">
                     <button
                       onClick={() => startEdit(subscription)}
-                      class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm"
+                      class="bg-blue-500 hover:bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex-1 lg:flex-none"
                     >
                       編輯
                     </button>
                     <button
                       onClick={() => deleteSubscription(subscription.objectId)}
-                      class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm"
+                      class="bg-red-500 hover:bg-red-600 text-white px-3 sm:px-4 py-2 rounded-lg text-sm flex-1 lg:flex-none"
                     >
                       刪除
                     </button>
