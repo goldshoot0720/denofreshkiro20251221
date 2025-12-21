@@ -101,8 +101,10 @@ export class SubscriptionService {
   ): Promise<Subscription> {
     // Convert date strings to Date objects if present
     const updateData = { ...data };
-    if (updateData.nextdate && typeof updateData.nextdate === 'string') {
-      updateData.nextdate = new Date(updateData.nextdate);
+    if (updateData.nextdate) {
+      if (typeof updateData.nextdate === 'string') {
+        updateData.nextdate = new Date(updateData.nextdate);
+      }
     }
 
     return await this.back4appClient.update<Subscription>(

@@ -109,8 +109,10 @@ export class FoodService {
   async updateFood(objectId: string, data: Partial<CreateFoodData>): Promise<Food> {
     // Convert date strings to Date objects if present
     const updateData = { ...data };
-    if (updateData.todate && typeof updateData.todate === 'string') {
-      updateData.todate = new Date(updateData.todate);
+    if (updateData.todate) {
+      if (typeof updateData.todate === 'string') {
+        updateData.todate = new Date(updateData.todate);
+      }
     }
 
     return await this.back4appClient.update<Food>(this.className, objectId, updateData);

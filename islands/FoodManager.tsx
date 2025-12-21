@@ -37,7 +37,12 @@ const loadFoods = async () => {
     const result = await response.json();
     
     if (result.success) {
-      foods.value = result.data;
+      // 處理日期格式轉換
+      const processedData = result.data.map((food: any) => ({
+        ...food,
+        todate: food.todate?.iso ? food.todate.iso.split('T')[0] : food.todate,
+      }));
+      foods.value = processedData;
     } else {
       error.value = result.error || "載入食品失敗";
     }
@@ -60,10 +65,16 @@ const saveFood = async () => {
     
     const method = editingFood.value ? "PUT" : "POST";
     
+    // 準備資料，確保日期格式正確
+    const submitData = {
+      ...formData.value,
+      todate: formData.value.todate || undefined, // 讓後端處理日期轉換
+    };
+    
     const response = await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData.value),
+      body: JSON.stringify(submitData),
     });
     
     const result = await response.json();

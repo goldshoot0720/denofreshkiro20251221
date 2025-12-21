@@ -43,7 +43,12 @@ const loadSubscriptions = async () => {
     const result = await response.json();
     
     if (result.success) {
-      subscriptions.value = result.data;
+      // 處理日期格式轉換
+      const processedData = result.data.map((sub: any) => ({
+        ...sub,
+        nextdate: sub.nextdate?.iso ? sub.nextdate.iso.split('T')[0] : sub.nextdate,
+      }));
+      subscriptions.value = processedData;
     } else {
       error.value = result.error || "載入訂閱失敗";
     }
@@ -66,10 +71,16 @@ const saveSubscription = async () => {
     
     const method = editingSubscription.value ? "PUT" : "POST";
     
+    // 準備資料，確保日期格式正確
+    const submitData = {
+      ...formData.value,
+      nextdate: formData.value.nextdate || undefined, // 讓後端處理日期轉換
+    };
+    
     const response = await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData.value),
+      body: JSON.stringify(submitData),
     });
     
     const result = await response.json();

@@ -39,7 +39,9 @@ export const handler: Handlers = {
 
       subscriptions.forEach(sub => {
         if (sub.nextdate) {
-          const nextDate = new Date(sub.nextdate);
+          // 處理 Parse 日期格式
+          const nextDateStr = sub.nextdate?.iso || sub.nextdate;
+          const nextDate = new Date(nextDateStr);
           const diffTime = nextDate.getTime() - today.getTime();
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -69,7 +71,9 @@ export const handler: Handlers = {
 
       foods.forEach(food => {
         if (food.todate) {
-          const expiryDate = new Date(food.todate);
+          // 處理 Parse 日期格式
+          const expiryDateStr = food.todate?.iso || food.todate;
+          const expiryDate = new Date(expiryDateStr);
           const diffTime = expiryDate.getTime() - today.getTime();
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
