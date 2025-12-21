@@ -149,11 +149,16 @@ const startEdit = (subscription: Subscription) => {
 // 計算剩餘天數
 const getDaysLeft = (nextdate?: string) => {
   if (!nextdate) return null;
-  const today = new Date();
-  const paymentDate = new Date(nextdate);
-  const diffTime = paymentDate.getTime() - today.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays;
+  try {
+    const today = new Date();
+    const paymentDate = new Date(nextdate);
+    if (isNaN(paymentDate.getTime())) return null;
+    const diffTime = paymentDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  } catch (error) {
+    return null;
+  }
 };
 
 export default function SubscriptionManager({ initialSubscriptions = [] }: SubscriptionManagerProps) {
@@ -331,12 +336,12 @@ export default function SubscriptionManager({ initialSubscriptions = [] }: Subsc
                       <div>
                         <span class="text-white/60">剩餘天數:</span>
                         <div class={`mt-1 font-medium ${
-                          !subscription.nextdate ? 'text-gray-400' :
+                          !subscription.nextdate || daysLeft === null ? 'text-gray-400' :
                           daysLeft < 0 ? 'text-red-400' :
                           daysLeft <= 3 ? 'text-yellow-400' :
                           'text-green-400'
                         }`}>
-                          {!subscription.nextdate ? '未設定' : 
+                          {!subscription.nextdate || daysLeft === null ? '未設定' : 
                            daysLeft < 0 ? '已過期' : `${daysLeft} 天`}
                         </div>
                       </div>

@@ -152,11 +152,16 @@ const startEdit = (food: Food) => {
 // 計算剩餘天數
 const getDaysLeft = (todate?: string) => {
   if (!todate) return null;
-  const today = new Date();
-  const expiry = new Date(todate);
-  const diffTime = expiry.getTime() - today.getTime();
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  return diffDays;
+  try {
+    const today = new Date();
+    const expiry = new Date(todate);
+    if (isNaN(expiry.getTime())) return null;
+    const diffTime = expiry.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  } catch (error) {
+    return null;
+  }
 };
 
 // 取得狀態顏色
@@ -374,7 +379,11 @@ export default function FoodManager({ initialFoods = [] }: FoodManagerProps) {
                       <div class="mt-3">
                         <span class="text-white/60 text-sm">剩餘天數:</span>
                         <span class={`ml-2 font-medium ${getStatusColor('fresh', getDaysLeft(food.todate))}`}>
-                          {getDaysLeft(food.todate) < 0 ? '已過期' : `${getDaysLeft(food.todate)} 天`}
+                          {(() => {
+                            const daysLeft = getDaysLeft(food.todate);
+                            if (daysLeft === null) return '日期錯誤';
+                            return daysLeft < 0 ? '已過期' : `${daysLeft} 天`;
+                          })()}
                         </span>
                       </div>
                     )}
