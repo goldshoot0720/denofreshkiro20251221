@@ -20,9 +20,9 @@ export default function Home() {
         </div>
 
         {/* 主要功能卡片 */}
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div class="space-y-4 mb-6 sm:mb-8">
           {/* 首頁卡片 */}
-          <a href="/" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+          <a href="/" class="block bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div class="flex items-center gap-3 mb-3">
               <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
                 <span class="text-2xl">🏠</span>
@@ -33,7 +33,7 @@ export default function Home() {
           </a>
 
           {/* 儀表板卡片 */}
-          <a href="/dashboard" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+          <a href="/dashboard" class="block bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div class="flex items-center gap-3 mb-3">
               <div class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
                 <span class="text-2xl">📊</span>
@@ -44,7 +44,7 @@ export default function Home() {
           </a>
 
           {/* 訂閱管理卡片 */}
-          <a href="/subscriptions" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+          <a href="/subscriptions" class="block bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div class="flex items-center gap-3 mb-3">
               <div class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
                 <span class="text-2xl">📋</span>
@@ -58,7 +58,7 @@ export default function Home() {
           </a>
 
           {/* 食品管理卡片 */}
-          <a href="/food" class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
+          <a href="/food" class="block bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 hover:bg-white/15 transition-colors border border-white/10">
             <div class="flex items-center gap-3 mb-3">
               <div class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
                 <span class="text-2xl">🍎</span>
