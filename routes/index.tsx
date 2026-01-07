@@ -103,8 +103,8 @@ export default function Home() {
             <span class="text-sm sm:text-base">💎</span> 後端技術
           </h3>
           <ul class="text-white/80 text-xs sm:text-sm space-y-1 sm:space-y-2">
-            <li>• Strapi CMS</li>
-            <li>• 影片存放於 Strapi</li>
+            <li>• Back4App</li>
+            <li>• 影片存放於 Back4App</li>
           </ul>
         </div>
       </div>
