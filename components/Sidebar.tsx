@@ -25,6 +25,7 @@ export default function Sidebar({ currentPath }: SidebarProps) {
         <nav class="space-y-2">
           {menuItems.map((item) => (
             <a
+              key={item.path}
               href={item.path}
               class={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                 currentPath === item.path

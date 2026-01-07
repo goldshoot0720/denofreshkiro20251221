@@ -10,10 +10,12 @@ import * as $api_dashboard_stats from "./routes/api/dashboard/stats.ts";
 import * as $api_foods from "./routes/api/foods.ts";
 import * as $api_foods_id_ from "./routes/api/foods/[id].ts";
 import * as $api_health from "./routes/api/health.ts";
+import * as $api_init_data from "./routes/api/init-data.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_stats from "./routes/api/stats.ts";
 import * as $api_subscriptions from "./routes/api/subscriptions.ts";
 import * as $api_subscriptions_id_ from "./routes/api/subscriptions/[id].ts";
+import * as $api_test_connection from "./routes/api/test-connection.ts";
 import * as $dashboard from "./routes/dashboard.tsx";
 import * as $demo from "./routes/demo.tsx";
 import * as $food from "./routes/food.tsx";
@@ -40,10 +42,12 @@ const manifest = {
     "./routes/api/foods.ts": $api_foods,
     "./routes/api/foods/[id].ts": $api_foods_id_,
     "./routes/api/health.ts": $api_health,
+    "./routes/api/init-data.ts": $api_init_data,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/stats.ts": $api_stats,
     "./routes/api/subscriptions.ts": $api_subscriptions,
     "./routes/api/subscriptions/[id].ts": $api_subscriptions_id_,
+    "./routes/api/test-connection.ts": $api_test_connection,
     "./routes/dashboard.tsx": $dashboard,
     "./routes/demo.tsx": $demo,
     "./routes/food.tsx": $food,
